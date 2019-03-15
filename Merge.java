@@ -7,11 +7,22 @@ public class Merge {
   }
 
   private static void mSH(int[] data, int[] temp, int l, int h) {
-
-
+    if(l >= h) {
+      return;
+    }
+    int k = (h+l)/2;
+    int[] left = new int[2];
+    int[] right = new int[2];
+    left[0] = l;
+    left[1] = k;
+    right[0] = k+1;
+    right[1] = h;
+    mSH(data,temp,l,k);
+    mSH(data,temp,k+1,h);
+    merge(data,temp,left,right);
   }
 
-  private static void merge(int[] data, int[] left, int[] right) {
+  private static void merge(int[] data, int[] temp, int[] left, int[] right) {
     return;
   }
 
