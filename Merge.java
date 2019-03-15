@@ -23,7 +23,22 @@ public class Merge {
   }
 
   private static void merge(int[] data, int[] temp, int[] left, int[] right) {
-    return;
+    int t = left[0];
+    int l = left[0];
+    int r = right[0];
+    while(l <= left[1] && r <= right[1]) {
+      if(data[l] < data[r]) {
+        temp[t] = data[l];
+        t++;
+        l++;
+      }
+      else {
+        temp[t] = data[r];
+        t++;
+        r++;
+      }
+    }
+
   }
 
   private int[] clone(int[] data) {
