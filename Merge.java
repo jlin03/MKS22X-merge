@@ -38,6 +38,13 @@ public class Merge {
         r++;
       }
     }
+    if(l < left[1]) {
+
+    }
+    if(r < right[1]) {
+
+    }
+
 
   }
 
