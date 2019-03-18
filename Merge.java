@@ -39,12 +39,20 @@ public class Merge {
       }
     }
     if(l < left[1]) {
-
+        for(int i = l; i <= left[1];l++) {
+          temp[t] = data[l];
+          t++;
+          l++;
+        }
     }
     if(r < right[1]) {
-
+      for(int i = r; i <= right[1];r++) {
+        temp[t] = data[r];
+        t++;
+        r++;
+      }
     }
-
+    return temp;
 
   }
 
