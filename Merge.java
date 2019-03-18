@@ -2,11 +2,12 @@ import java.util.*;
 public class Merge {
 
   public static void mergesort(int[] data) {
-    int[] temp = clone(data);
-    mSH(data,0,data.length-1);
+	int[] temp = clone(data);
+    mSH(data,temp,0,data.length-1);
+	
   }
 
-  private static void mSH(int[] data, int l, int h) {
+  private static void mSH(int[] data, int[] temp, int l, int h) {
     if(l >= h) {
       return;
     }
@@ -19,16 +20,18 @@ public class Merge {
     right[1] = h;
     System.out.println(Arrays.toString(left));
     System.out.println(Arrays.toString(right));
-    mSH(data,l,k);
-    mSH(data,k+1,h);
-    merge(data,left,right);
+    mSH(data,temp,l,k);
+    mSH(data,temp,k+1,h);
+	merge(data,left,right);
+
+	System.out.println(Arrays.toString(data));
   }
 
   private static void merge(int[] data, int[] left, int[] right) {
-    int t = left[0];
+    int t = 0;
     int l = left[0];
     int r = right[0];
-    int[] temp = clone(data);
+    int[] temp = new int[right[1]-left[0]+1];
     while(l <= left[1] && r <= right[1]) {
       if(data[l] < data[r]) {
         temp[t] = data[l];
@@ -55,7 +58,9 @@ public class Merge {
         r++;
       }
     }
-    data = temp;
+    for(int i = left[0]; i <= right[1];i++) {
+		data[i] = temp[i-left[0]];
+	}
 
   }
 
