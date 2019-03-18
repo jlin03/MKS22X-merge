@@ -3,10 +3,10 @@ public class Merge {
 
   public static void mergesort(int[] data) {
     int[] temp = clone(data);
-    mSH(data,temp,0,data.length-1);
+    mSH(data,0,data.length-1);
   }
 
-  private static void mSH(int[] data, int[] temp, int l, int h) {
+  private static void mSH(int[] data, int l, int h) {
     if(l >= h) {
       return;
     }
@@ -17,15 +17,18 @@ public class Merge {
     left[1] = k;
     right[0] = k+1;
     right[1] = h;
-    mSH(data,temp,l,k);
-    mSH(data,temp,k+1,h);
-    merge(data,temp,left,right);
+    System.out.println(Arrays.toString(left));
+    System.out.println(Arrays.toString(right));
+    mSH(data,l,k);
+    mSH(data,k+1,h);
+    merge(data,left,right);
   }
 
-  private static void merge(int[] data, int[] temp, int[] left, int[] right) {
+  private static void merge(int[] data, int[] left, int[] right) {
     int t = left[0];
     int l = left[0];
     int r = right[0];
+    int[] temp = clone(data);
     while(l <= left[1] && r <= right[1]) {
       if(data[l] < data[r]) {
         temp[t] = data[l];
@@ -38,25 +41,25 @@ public class Merge {
         r++;
       }
     }
-    if(l < left[1]) {
-        for(int i = l; i <= left[1];l++) {
-          temp[t] = data[l];
+    if(l <= left[1]) {
+        for(int i = l; i <= left[1];i++) {
+          temp[t] = data[i];
           t++;
           l++;
         }
     }
-    if(r < right[1]) {
-      for(int i = r; i <= right[1];r++) {
-        temp[t] = data[r];
+    if(r <= right[1]) {
+      for(int i = r; i <= right[1];i++) {
+        temp[t] = data[i];
         t++;
         r++;
       }
     }
-    return temp;
+    data = temp;
 
   }
 
-  private int[] clone(int[] data) {
+  private static int[] clone(int[] data) {
     int[] out = new int[data.length];
     for(int i = 0; i < out.length; i++) {
       out[i] = data[i];
@@ -65,6 +68,12 @@ public class Merge {
   }
 
 
+  public static void main(String[] args) {
+    int[] test = {53,7,1,5,4,1,52,24,97};
+    mergesort(test);
+    System.out.println(Arrays.toString(test));
+
+  }
 
 
 
