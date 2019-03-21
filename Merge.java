@@ -2,13 +2,13 @@ import java.util.*;
 public class Merge {
 
   public static void mergesort(int[] data) {
-	int[] temp = clone(data);
-    mSH(data,temp,0,data.length-1);
-	
+    mSH(data,0,data.length-1);
+
   }
 
-  private static void mSH(int[] data, int[] temp, int l, int h) {
-    if(l >= h) {
+  private static void mSH(int[] data, int l, int h) {
+    if(h - l < 2) {
+      insert(data,l,h);
       return;
     }
     int k = (h+l)/2;
@@ -18,13 +18,9 @@ public class Merge {
     left[1] = k;
     right[0] = k+1;
     right[1] = h;
-    System.out.println(Arrays.toString(left));
-    System.out.println(Arrays.toString(right));
-    mSH(data,temp,l,k);
-    mSH(data,temp,k+1,h);
-	merge(data,left,right);
-
-	System.out.println(Arrays.toString(data));
+    mSH(data,l,k);
+    mSH(data,k+1,h);
+	  merge(data,left,right);
   }
 
   private static void merge(int[] data, int[] left, int[] right) {
@@ -64,6 +60,18 @@ public class Merge {
 
   }
 
+  public static void insert(int[] data, int l, int h) {
+    for(int i = l; i <= h; i++) {
+      for(int b = i; b > l; b--) {
+        if(data[b] < data[b-1]) {
+          int temp = data[b];
+          data[b] = data[b-1];
+          data[b-1] = temp;
+        }
+      }
+    }
+  }
+
   private static int[] clone(int[] data) {
     int[] out = new int[data.length];
     for(int i = 0; i < out.length; i++) {
@@ -73,12 +81,7 @@ public class Merge {
   }
 
 
-  public static void main(String[] args) {
-    int[] test = {53,7,1,5,4,1,52,24,97};
-    mergesort(test);
-    System.out.println(Arrays.toString(test));
 
-  }
 
 
 
